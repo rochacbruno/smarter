@@ -43,6 +43,72 @@ items = SmartList([None, "", [], 13])
 items.first_not_nullable() # 13
 ```
 
+## Smart `Result` Wrapper
+
+Instead of calling error prone functions, wrap it in a `Result` object
+
+```py
+def this_fails(x):
+    return x / 0
+
+w = Result(this_fails, 5)  # instead of w = this_fails(5)
+
+w.is_error() # True
+w.is_ok() # False
+w.exc # ZeroDivisionError
+w.unwrap_or(5) # 5
+w.unwrap_or_else(lambda: 5) # 5
+w.and_then(lambda x: x + 1, 5) # Raises ZerodivisionError
+w.unwrap() # Raises ZeroDivisionError
+```
+
+```py
+def this_succeeds(x):
+    return 1 + x
+
+w = Result(this_succeeds, 5)  # Instead of w = this_succeeds(5)
+w.is_error() # False
+w.is_ok() # True
+w.exc # None
+w.unwrap_or(5) # 6
+w.unwrap_or_else(lambda: 'default') # 6
+w.and_then(lambda value, x: value * x, 5).unwrap() # 30
+w.unwrap() # 6
+
+def double_integer(x):
+    return x * 2
+
+result = (
+  w.and_then(double_integer)  # 12
+   .and_then(double_integer)  # 24
+   .and_then(double_integer)  # 48
+   .and_then(double_integer)  # 96
+   .unwrap()
+) # 96
+
+w.ok() # 6
+```
+
+By default all exceptions are `wrapped` in a `Result` object but it is
+possible to specify the exception type.
+
+```py
+person = {'name': 'John', 'age': '25'}
+w = Result(person.__getitem__, 'city', suppress=KeyError)
+w.is_error() # True
+w.exc # KeyError
+w.unwrap_or('Gotham') # 'Gotham'
+
+# When exception type is specified, other exceptions are not wrapped
+# raising the original exception eagerly/immediately.
+w = Result(person.get, 'city', 'other', 'another', suppress=KeyError)
+Traceback (most recent call last):
+...
+TypeError: get expected at most 2 arguments, got 3
+```
+
+However the above example is better covered by the smart `>> get` described below.
+
 ## Smart `get` operations
 
 ### Given the following objects
