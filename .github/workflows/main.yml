@@ -31,7 +31,8 @@ jobs:
       - name: Run linter
         run: make lint
 
-  tests_nix:
+  tests_linux:
+    needs: linter
     strategy:
       fail-fast: false
       matrix:
@@ -46,9 +47,28 @@ jobs:
       - name: Install project
         run: make install
       - name: Run tests
+        run: make ci
+
+  tests_mac:
+    needs: linter
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.9]
+        os: [macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install project
+        run: make install
+      - name: Run tests
         run: make test
 
   tests_win:
+    needs: linter
     strategy:
       fail-fast: false
       matrix:

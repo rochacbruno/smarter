@@ -5,7 +5,7 @@ test: lint
 
 lint:
 	flake8 .
-	black --check .
+	black -l 79 --check .
 	mypy smarter
 
 install:
@@ -13,7 +13,7 @@ install:
 
 fmt:
 	isort .
-	black .
+	black -l 79 .
 
 report:
 	codecov
