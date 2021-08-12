@@ -2,8 +2,10 @@ Changelog
 =========
 
 
-(unreleased)
-------------
+0.1.3 (2021-08-12)
+------------------
+- Release 0.1.3 🚀 [Bruno Rocha]
+- Release v0.1.2. [Bruno Rocha]
 - Fix CI 🚢 [Bruno Rocha]
 - Release 0.1.1 🚀 [Bruno Rocha]
 
