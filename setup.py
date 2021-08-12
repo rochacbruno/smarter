@@ -19,6 +19,7 @@ setup(
             "pytest-cov",
             "codecov",
             "mypy",
+            "gitchangelog",
         ],
     },
 )
