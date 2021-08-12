@@ -14,8 +14,3 @@ install:
 fmt:
 	isort .
 	black -l 79 .
-
-report:
-	codecov --token $CODECOV_TOKEN
-
-ci: install test report

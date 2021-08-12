@@ -47,7 +47,11 @@ jobs:
       - name: Install project
         run: make install
       - name: Run tests
-        run: make ci
+        run: make test
+      - name: "Upload coverage to Codecov"
+        uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
 
   tests_mac:
     needs: linter
