@@ -1,5 +1,8 @@
 # Smarter
 
+[![codecov](https://codecov.io/gh/rochacbruno/smarter/branch/main/graph/badge.svg?token=I9ZGCFTQT9)](https://codecov.io/gh/rochacbruno/smarter)
+[![CI](https://github.com/rochacbruno/smarter/actions/workflows/main.yml/badge.svg)](https://github.com/rochacbruno/smarter/actions/workflows/main.yml)
+
 Some objects could be smarter
 
 ```bash
