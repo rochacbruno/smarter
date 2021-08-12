@@ -16,6 +16,6 @@ fmt:
 	black -l 79 .
 
 report:
-	codecov
+	codecov --token $CODECOV_TOKEN
 
 ci: install test report
