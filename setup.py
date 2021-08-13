@@ -6,6 +6,7 @@ setup(
     name="smarter",
     version="0.1.4",
     description="Some objects could be smarter",
+    url="https://github.com/rochacbruno/smarter/",
     long_description=Path("README.md").read_text(),
     long_description_content_type="text/markdown",
     author="Bruno Rocha",
